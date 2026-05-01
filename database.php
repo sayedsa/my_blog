@@ -3,7 +3,7 @@
 $hostname  = "localhost";
 $username = "root";
 $password = "";
-$databaseName = "blog";
+$databaseName = "blog_db";
 
 //Instance of the class 'mysqli'
 //Its a built in PHP class that we can use to connect to database

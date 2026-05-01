@@ -1,0 +1,33 @@
+name: Deploy on Namechaep
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy VIA SSH to Namecheap
+        uses: appleboy/ssh-action@v1.0.3
+
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: GH_PAT
+
+          script: |
+            cd /home/toptcszk/portfolio.toptechschooledu.com
+            git fetch origin master
+            git reset --hard origin/master
